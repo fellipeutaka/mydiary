@@ -10,7 +10,7 @@ import {
   onIdTokenChanged,
 } from "firebase/auth";
 import { auth } from "config/firebaseConfig";
-import { setCookie, destroyCookie, parseCookies } from "nookies";
+import { setCookie, destroyCookie } from "nookies";
 import Router from "next/router";
 
 type AuthMethodsType = {
