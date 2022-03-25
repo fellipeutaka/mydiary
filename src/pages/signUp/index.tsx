@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Sign Un | My Diary</title>
+        <title>Sign Up | My Diary</title>
         <meta name="description" content="My Diary" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
