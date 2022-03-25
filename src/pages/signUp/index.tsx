@@ -9,7 +9,7 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const { authMethods } = useAuth();
 
-  function handleSignIn(e: FormEvent) {
+  function handleSignUp(e: FormEvent) {
     e.preventDefault();
     authMethods.createUserWithEmailAndPassword(name, email, password);
   }
@@ -22,7 +22,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <form onSubmit={handleSignIn}>
+        <form onSubmit={handleSignUp}>
           <Input
             type="text"
             placeholder="Name"

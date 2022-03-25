@@ -74,7 +74,14 @@ export default function Home() {
           <NextLink passHref href="/forgot">
             <Link>Forgot my password</Link>
           </NextLink>
-          <Button type="submit" my={6} w="100%" h={12}>
+          <Button
+            type="submit"
+            my={6}
+            w="100%"
+            h={12}
+            bgColor="blue.500"
+            _hover={{ backgroundColor: "blue.400" }}
+          >
             Sign In
           </Button>
           <Text alignSelf="center">

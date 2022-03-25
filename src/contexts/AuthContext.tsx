@@ -8,10 +8,13 @@ import {
   GoogleAuthProvider,
   User,
   onIdTokenChanged,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "config/firebaseConfig";
 import { setCookie, destroyCookie } from "nookies";
 import Router from "next/router";
+import { useToast, UseToastOptions } from "@chakra-ui/react";
+import { FirebaseError } from "firebase/app";
 
 type AuthMethodsType = {
   createUserWithEmailAndPassword(
@@ -25,6 +28,7 @@ type AuthMethodsType = {
   ) => Promise<void>;
   signInWithGoogle(): Promise<void>;
   signOut(): Promise<void>;
+  forgotPassword(email: string): Promise<void>;
 };
 
 type AuthContextType = {
@@ -45,7 +49,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     signInWithEmailAndPassword,
     signInWithGoogle,
     signOut,
+    forgotPassword,
   };
+
+  const toast = useToast();
 
   async function createUserWithEmailAndPassword(
     name: string,
@@ -110,6 +117,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       Router.push("/");
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  async function forgotPassword(email: string) {
+    const config: UseToastOptions = {
+      duration: 4500,
+      isClosable: true,
+      position: "top-right",
+    };
+    try {
+      await sendPasswordResetEmail(auth, email);
+      Router.push("/signIn");
+      toast({
+        title: "Success",
+        description: "Please, check your e-mail.",
+        status: "success",
+        ...config,
+      });
+    } catch (err) {
+      if (err instanceof FirebaseError) {
+        toast({
+          title: "Error",
+          description: err.code,
+          status: "error",
+          ...config,
+        });
+      }
     }
   }
 
