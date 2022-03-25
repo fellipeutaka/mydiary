@@ -1,10 +1,9 @@
 import Head from "next/head";
 import { Button } from "@chakra-ui/react";
-import { AuthContext } from "contexts/AuthContext";
-import { useContext } from "react";
+import { useAuth } from "hooks/useAuth";
 
 export default function App() {
-  const { user, authMethods } = useContext(AuthContext);
+  const { user, authMethods } = useAuth();
   return (
     <>
       <Head>

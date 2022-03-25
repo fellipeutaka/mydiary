@@ -1,13 +1,13 @@
 import Head from "next/head";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
+import { useAuth } from "hooks/useAuth";
 import { Input, Button } from "@chakra-ui/react";
-import { AuthContext } from "contexts/AuthContext";
 
 export default function Home() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { authMethods } = useContext(AuthContext);
+  const { authMethods } = useAuth();
 
   function handleSignIn(e: FormEvent) {
     e.preventDefault();
