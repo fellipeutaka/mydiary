@@ -46,7 +46,7 @@ export default function Home() {
         </Heading>
         <Flex as="form" flexDir="column" w="480px" onSubmit={handleSignIn}>
           <InputGroup>
-            <InputLeftElement pointerEvents="none">
+            <InputLeftElement pointerEvents="none" mt="3px">
               <EmailIcon color="gray.300" />
             </InputLeftElement>
             <Input
@@ -59,7 +59,7 @@ export default function Home() {
             />
           </InputGroup>
           <InputGroup>
-            <InputLeftElement pointerEvents="none">
+            <InputLeftElement pointerEvents="none" mt="3px">
               <LockIcon color="gray.300" />
             </InputLeftElement>
             <Input

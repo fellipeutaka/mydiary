@@ -44,7 +44,7 @@ export default function Home() {
             Recover your password
           </Heading>
           <InputGroup>
-            <InputLeftElement pointerEvents="none">
+            <InputLeftElement pointerEvents="none" mt="3px">
               <EmailIcon color="gray.300" />
             </InputLeftElement>
             <Input
