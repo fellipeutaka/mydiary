@@ -19,11 +19,15 @@ import { GoogleIcon } from "components/Icons";
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const { authMethods } = useAuth();
 
   function handleSignIn(e: FormEvent) {
     e.preventDefault();
-    authMethods.signInWithEmailAndPassword(email, password);
+    authMethods
+      .signInWithEmailAndPassword(email, password)
+      .then(() => setLoading(true))
+      .finally(() => setLoading(false));
   }
   return (
     <>
@@ -82,6 +86,7 @@ export default function SignIn() {
           </NextLink>
           <Button
             type="submit"
+            isLoading={loading}
             my={6}
             w="100%"
             h={12}

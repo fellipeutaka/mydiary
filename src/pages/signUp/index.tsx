@@ -21,12 +21,16 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const { authMethods } = useAuth();
   const { colorMode } = useColorMode();
 
   function handleSignUp(e: FormEvent) {
     e.preventDefault();
-    authMethods.createUserWithEmailAndPassword(name, email, password, token);
+    authMethods
+      .createUserWithEmailAndPassword(name, email, password, token)
+      .then(() => setLoading(true))
+      .finally(() => setLoading(false));
   }
 
   return (
@@ -102,6 +106,7 @@ export default function SignUp() {
           />
           <Button
             type="submit"
+            isLoading={loading}
             my={6}
             w="100%"
             h={12}

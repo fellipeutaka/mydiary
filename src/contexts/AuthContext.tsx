@@ -20,6 +20,7 @@ import {
   validateEmail,
   validatePassword,
 } from "utils/validateFields";
+import { verifyErrorCode } from "utils/verifyErrorCode";
 
 type AuthMethodsType = {
   createUserWithEmailAndPassword(
@@ -28,10 +29,10 @@ type AuthMethodsType = {
     password: string,
     captchaToken: string | null
   ): Promise<ToastId | undefined>;
-  signInWithEmailAndPassword: (
+  signInWithEmailAndPassword(
     email: string,
     password: string
-  ) => Promise<void>;
+  ): Promise<ToastId | undefined>;
   signInWithGoogle(): Promise<void>;
   signOut(): Promise<void>;
   forgotPassword(email: string): Promise<void>;
@@ -110,11 +111,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(user);
       Router.push("/app");
     } catch (err) {
-      console.log(err);
+      if (err instanceof FirebaseError) {
+        toast({
+          title: "Error",
+          description: verifyErrorCode(err.code) || err.message,
+          status: "error",
+        });
+      }
     }
   }
 
   async function signInWithEmailAndPassword(email: string, password: string) {
+    if (validateEmail(email)) {
+      return toast({
+        title: "Error",
+        description: "Please, type your e-mail correctly",
+        status: "error",
+      });
+    } else if (validatePassword(password)) {
+      return toast({
+        title: "Error",
+        description: "Please, type a strong password",
+        status: "error",
+      });
+    }
     try {
       const { user } = await FirebaseSignInEmail(auth, email, password);
       const token = await user.getIdToken();
@@ -125,7 +145,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(user);
       Router.push("/app");
     } catch (err) {
-      console.log(err);
+      if (err instanceof FirebaseError) {
+        toast({
+          title: "Error",
+          description: verifyErrorCode(err.code) || err.message,
+          status: "error",
+        });
+      }
     }
   }
 
@@ -169,7 +195,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (err instanceof FirebaseError) {
         toast({
           title: "Error",
-          description: err.code,
+          description: verifyErrorCode(err.code) || err.message,
           status: "error",
         });
       }
