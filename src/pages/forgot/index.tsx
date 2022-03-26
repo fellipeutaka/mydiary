@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { EmailIcon } from "@chakra-ui/icons";
 
-export default function Home() {
+export default function Forgot() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const { authMethods } = useAuth();

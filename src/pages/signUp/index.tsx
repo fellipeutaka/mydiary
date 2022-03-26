@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { createRef, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { useAuth } from "hooks/useAuth";
 import {
   Input,
@@ -9,30 +9,24 @@ import {
   Link,
   InputGroup,
   InputLeftElement,
+  useColorMode,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { EmailIcon, LockIcon, ArrowBackIcon } from "@chakra-ui/icons";
 import { UserIcon } from "components/Icons";
 import ReCAPTCHA from "react-google-recaptcha";
 
-export default function Home() {
+export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState<string | null>(null);
   const { authMethods } = useAuth();
-  const recaptchaRef = createRef<ReCAPTCHA>();
+  const { colorMode } = useColorMode();
 
   function handleSignUp(e: FormEvent) {
     e.preventDefault();
-    recaptchaRef.current?.execute();
-    authMethods.createUserWithEmailAndPassword(name, email, password);
-  }
-
-  function onReCAPTCHAChange(captchaCode: string | null) {
-    if (!captchaCode) {
-      return;
-    }
-    recaptchaRef.current?.reset();
+    authMethods.createUserWithEmailAndPassword(name, email, password, token);
   }
 
   return (
@@ -61,12 +55,6 @@ export default function Home() {
           maxW="480px"
           onSubmit={handleSignUp}
         >
-          <ReCAPTCHA
-            ref={recaptchaRef}
-            size="invisible"
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-            onChange={onReCAPTCHAChange}
-          />
           <InputGroup>
             <InputLeftElement pointerEvents="none" mt="3px">
               <UserIcon color="gray.300" />
@@ -102,10 +90,16 @@ export default function Home() {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              mb={2}
+              mb={6}
               h="46px"
             />
           </InputGroup>
+          <ReCAPTCHA
+            style={{ alignSelf: "center" }}
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+            onChange={(token) => setToken(token)}
+            theme={colorMode}
+          />
           <Button
             type="submit"
             my={6}

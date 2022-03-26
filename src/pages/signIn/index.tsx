@@ -16,7 +16,7 @@ import NextLink from "next/link";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { GoogleIcon } from "components/Icons";
 
-export default function Home() {
+export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { authMethods } = useAuth();

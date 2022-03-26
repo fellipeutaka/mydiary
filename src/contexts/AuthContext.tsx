@@ -13,15 +13,21 @@ import {
 import { auth } from "config/firebaseConfig";
 import { setCookie, destroyCookie } from "nookies";
 import Router from "next/router";
-import { useToast, UseToastOptions } from "@chakra-ui/react";
+import { ToastId, useToast } from "@chakra-ui/react";
 import { FirebaseError } from "firebase/app";
+import {
+  validateName,
+  validateEmail,
+  validatePassword,
+} from "utils/validateFields";
 
 type AuthMethodsType = {
   createUserWithEmailAndPassword(
     name: string,
     email: string,
-    password: string
-  ): Promise<void>;
+    password: string,
+    captchaToken: string | null
+  ): Promise<ToastId | undefined>;
   signInWithEmailAndPassword: (
     email: string,
     password: string
@@ -52,13 +58,43 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     forgotPassword,
   };
 
-  const toast = useToast();
+  const toast = useToast({
+    duration: 4500,
+    isClosable: true,
+    position: "top-right",
+  });
 
   async function createUserWithEmailAndPassword(
     name: string,
     email: string,
-    password: string
+    password: string,
+    captchaToken: string | null
   ) {
+    if (validateName(name)) {
+      return toast({
+        title: "Error",
+        description: "Please, type your name correctly",
+        status: "error",
+      });
+    } else if (validateEmail(email)) {
+      return toast({
+        title: "Error",
+        description: "Please, type your e-mail correctly",
+        status: "error",
+      });
+    } else if (validatePassword(password)) {
+      return toast({
+        title: "Error",
+        description: "Please, type a strong password",
+        status: "error",
+      });
+    } else if (!captchaToken) {
+      return toast({
+        title: "Error",
+        description: "Please, check the captcha",
+        status: "error",
+      });
+    }
     try {
       const { user } = await FirebaseCreateUserWithEmailAndPassword(
         auth,
@@ -121,11 +157,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   async function forgotPassword(email: string) {
-    const config: UseToastOptions = {
-      duration: 4500,
-      isClosable: true,
-      position: "top-right",
-    };
     try {
       await sendPasswordResetEmail(auth, email);
       Router.push("/signIn");
@@ -133,7 +164,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         title: "Success",
         description: "Please, check your e-mail.",
         status: "success",
-        ...config,
       });
     } catch (err) {
       if (err instanceof FirebaseError) {
@@ -141,7 +171,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           title: "Error",
           description: err.code,
           status: "error",
-          ...config,
         });
       }
     }
