@@ -1,7 +1,20 @@
 import Head from "next/head";
 import { FormEvent, useState } from "react";
 import { useAuth } from "hooks/useAuth";
-import { Input, Button } from "@chakra-ui/react";
+import {
+  Input,
+  Button,
+  Flex,
+  Heading,
+  Link,
+  Text,
+  InputGroup,
+  InputLeftElement,
+  Divider,
+} from "@chakra-ui/react";
+import NextLink from "next/link";
+import { EmailIcon, LockIcon } from "@chakra-ui/icons";
+import { GoogleIcon, UserIcon } from "components/Icons";
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -21,33 +34,72 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <form onSubmit={handleSignUp}>
-          <Input
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <br />
-          <br />
-          <Input
-            type="text"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br />
-          <br />
-          <Input
-            type="text"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button type="submit">Sign Up</Button>
-        </form>
-      </main>
+      <Flex
+        as="main"
+        w="100%"
+        minH="100vh"
+        justifyContent="center"
+        alignItems="center"
+        flexDir="column"
+      >
+        <Heading as="h1" mb={6}>
+          Sign Up
+        </Heading>
+        <Flex as="form" flexDir="column" w="480px" onSubmit={handleSignUp}>
+          <InputGroup>
+            <InputLeftElement pointerEvents="none" mt="3px">
+              <UserIcon color="gray.300" />
+            </InputLeftElement>
+            <Input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              mb={6}
+              h="46px"
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputLeftElement pointerEvents="none" mt="3px">
+              <EmailIcon color="gray.300" />
+            </InputLeftElement>
+            <Input
+              type="text"
+              placeholder="E-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              mb={6}
+              h="46px"
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputLeftElement pointerEvents="none" mt="3px">
+              <LockIcon color="gray.300" />
+            </InputLeftElement>
+            <Input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              mb={2}
+              h="46px"
+            />
+          </InputGroup>
+          <Button
+            type="submit"
+            my={6}
+            w="100%"
+            h={12}
+            bgColor="blue.500"
+            _hover={{ backgroundColor: "blue.400" }}
+          >
+            Sign Up
+          </Button>
+          <NextLink passHref href="/signIn">
+            <Link alignSelf="center">Back to Sign In</Link>
+          </NextLink>
+        </Flex>
+      </Flex>
     </>
   );
 }
