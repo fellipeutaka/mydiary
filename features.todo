@@ -1,7 +1,9 @@
-OAuth
-Private and public routes
-Forgot password
-Validate JWT Token @high
-Database
-Record audios
-Upload images
+✔ OAuth @done(22-03-26 02:25)
+✔ Private and public routes @done(22-03-26 02:25)
+✔ Forgot password @done(22-03-26 02:25)
+✔ ReCaptcha Sign Up @done(22-03-26 02:25)
+☐ Validate Forms @high
+☐ Validate JWT Token @high
+☐ Database
+☐ Record audios
+☐ Upload images

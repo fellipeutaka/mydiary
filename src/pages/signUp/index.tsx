@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { FormEvent, useState } from "react";
+import { createRef, FormEvent, useState } from "react";
 import { useAuth } from "hooks/useAuth";
 import {
   Input,
@@ -13,17 +13,28 @@ import {
 import NextLink from "next/link";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
 import { UserIcon } from "components/Icons";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Home() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { authMethods } = useAuth();
+  const recaptchaRef = createRef<ReCAPTCHA>();
 
   function handleSignUp(e: FormEvent) {
     e.preventDefault();
+    recaptchaRef.current?.execute();
     authMethods.createUserWithEmailAndPassword(name, email, password);
   }
+
+  function onReCAPTCHAChange(captchaCode: string | null) {
+    if (!captchaCode) {
+      return;
+    }
+    recaptchaRef.current?.reset();
+  }
+
   return (
     <>
       <Head>
@@ -44,6 +55,12 @@ export default function Home() {
           Sign Up
         </Heading>
         <Flex as="form" flexDir="column" w="480px" onSubmit={handleSignUp}>
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            size="invisible"
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+            onChange={onReCAPTCHAChange}
+          />
           <InputGroup>
             <InputLeftElement pointerEvents="none" mt="3px">
               <UserIcon color="gray.300" />
