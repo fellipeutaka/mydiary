@@ -27,9 +27,9 @@ export default function SignUp() {
 
   function handleSignUp(e: FormEvent) {
     e.preventDefault();
+    setLoading(true);
     authMethods
       .createUserWithEmailAndPassword(name, email, password, token)
-      .then(() => setLoading(true))
       .finally(() => setLoading(false));
   }
 

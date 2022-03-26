@@ -24,9 +24,9 @@ export default function SignIn() {
 
   function handleSignIn(e: FormEvent) {
     e.preventDefault();
+    setLoading(true);
     authMethods
       .signInWithEmailAndPassword(email, password)
-      .then(() => setLoading(true))
       .finally(() => setLoading(false));
   }
   return (
