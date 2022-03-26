@@ -7,14 +7,12 @@ import {
   Flex,
   Heading,
   Link,
-  Text,
   InputGroup,
   InputLeftElement,
-  Divider,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
-import { GoogleIcon, UserIcon } from "components/Icons";
+import { UserIcon } from "components/Icons";
 
 export default function Home() {
   const [name, setName] = useState("");
