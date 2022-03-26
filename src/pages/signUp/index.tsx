@@ -11,7 +11,7 @@ import {
   InputLeftElement,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { EmailIcon, LockIcon } from "@chakra-ui/icons";
+import { EmailIcon, LockIcon, ArrowBackIcon } from "@chakra-ui/icons";
 import { UserIcon } from "components/Icons";
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -54,7 +54,13 @@ export default function Home() {
         <Heading as="h1" mb={6}>
           Sign Up
         </Heading>
-        <Flex as="form" flexDir="column" w="480px" onSubmit={handleSignUp}>
+        <Flex
+          as="form"
+          flexDir="column"
+          w={["90%", "100%"]}
+          maxW="480px"
+          onSubmit={handleSignUp}
+        >
           <ReCAPTCHA
             ref={recaptchaRef}
             size="invisible"
@@ -111,7 +117,19 @@ export default function Home() {
             Sign Up
           </Button>
           <NextLink passHref href="/signIn">
-            <Link alignSelf="center">Back to Sign In</Link>
+            <Link
+              fontSize="sm"
+              fontWeight="bold"
+              display="block"
+              w="max-content"
+              marginX="auto"
+              verticalAlign="middle"
+              color="blue.500"
+              _hover={{ color: "blue.400" }}
+            >
+              <ArrowBackIcon w={5} h={5} mr={2} my={1} />
+              Back to Sign In
+            </Link>
           </NextLink>
         </Flex>
       </Flex>

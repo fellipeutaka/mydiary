@@ -44,7 +44,13 @@ export default function Home() {
         <Heading as="h1" mb={6}>
           Sign In
         </Heading>
-        <Flex as="form" flexDir="column" w="480px" onSubmit={handleSignIn}>
+        <Flex
+          as="form"
+          flexDir="column"
+          w={["90%", "100%"]}
+          maxW="480px"
+          onSubmit={handleSignIn}
+        >
           <InputGroup>
             <InputLeftElement pointerEvents="none" mt="3px">
               <EmailIcon color="gray.300" />
@@ -72,7 +78,7 @@ export default function Home() {
             />
           </InputGroup>
           <NextLink passHref href="/forgot">
-            <Link>Forgot my password</Link>
+            <Link w="max-content">Forgot my password</Link>
           </NextLink>
           <Button
             type="submit"
