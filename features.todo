@@ -2,6 +2,7 @@
 ✔ Private and public routes @done(22-03-26 02:25)
 ✔ Forgot password @done(22-03-26 02:25)
 ✔ ReCaptcha Sign Up @done(22-03-26 02:25)
+☐ Home page
 ☐ Validate Forms @high
 ☐ Validate JWT Token @high
 ☐ Database
