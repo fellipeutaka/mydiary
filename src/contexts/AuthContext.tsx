@@ -86,8 +86,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } else if (validatePassword(password)) {
       return toast({
         title: "Error",
-        description: "Please, type a strong password",
+        description:
+          "Password must be 6-32 characters in length and must contain at least one lower case character, one upper case character and one number.",
         status: "error",
+        duration: 7500,
       });
     } else if (!captchaToken) {
       return toast({

@@ -12,7 +12,8 @@ export function validateEmail(email: string) {
 }
 
 export function validatePassword(password: string) {
-  const minMax = [6, 20];
+  // Password must be 6-32 characters in length and must contain at least one lower case character, one upper case character and one number.
+  const minMax = [6, 32];
   const passwordRegex = new RegExp(
     `^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{${minMax.toString()}}$`
   );
