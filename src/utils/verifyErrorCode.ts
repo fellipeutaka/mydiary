@@ -9,7 +9,7 @@ export function verifyErrorCode(code: string) {
     case "auth/user-disabled":
       return "The user corresponding to the given credential has been deactivated";
     case "auth/user-not-found":
-      return "User does not match any credential";
+      return "Username or password is incorrect";
     case "auth/weak-password":
       return "Password is too weak";
     case "auth/email-already-in-use":
@@ -49,7 +49,7 @@ export function verifyErrorCode(code: string) {
     case "auth/invalid-credential":
       return "The credential has expired or is malformed";
     case "auth/wrong-password":
-      return "Incorrect password";
+      return "Username or password is incorrect";
     case "auth/invalid-verification-code":
       return "Credential verification code is not valid";
     case "auth/invalid-verification-id":
