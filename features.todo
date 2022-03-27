@@ -3,6 +3,10 @@
 ✔ Forgot password @done(22-03-26 02:25)
 ✔ ReCaptcha Sign Up @done(22-03-26 02:25)
 ☐ Home page
+    - Three.js (3D)
+    - Parallax
+    - Animations
+☐ Home page content with GraphCMS and ISR
 ✔ Validate Forms @high @done(22-03-26 19:59)
 ☐ Validate Captcha Token @high
 ☐ Validate JWT Token @high
