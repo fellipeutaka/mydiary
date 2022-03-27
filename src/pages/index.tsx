@@ -1,5 +1,12 @@
 import Head from "next/head";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+import VoxelDogLoader from "components/3D/voxel-dog-loader";
+const LazyVoxelDog = dynamic(() => import("components/3D/voxel-dog"), {
+  ssr: false,
+  loading: () => <VoxelDogLoader />,
+});
 
 export default function Home() {
   return (
@@ -11,6 +18,7 @@ export default function Home() {
       </Head>
 
       <main>
+        <LazyVoxelDog />
         <h1>Hello World</h1>
         <Link passHref href="/signIn">
           Sign In
