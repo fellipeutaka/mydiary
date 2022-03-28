@@ -2,13 +2,13 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { loadGLTFModel } from "lib/model";
-import { DogSpinner, DogContainer } from "./voxel-dog-loader";
+import { NotebookSpinner, NotebookContainer } from "./NotebookLoader";
 
 function easeOutCirc(x: number) {
   return Math.sqrt(1 - Math.pow(x - 1, 4));
 }
 
-const VoxelDog = () => {
+export default function VoxelNotebook() {
   const refContainer = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
   const [renderer, setRenderer] = useState<THREE.WebGLRenderer>();
@@ -73,7 +73,7 @@ const VoxelDog = () => {
       controls.target = target;
       setControls(controls);
 
-      loadGLTFModel(scene, "/dog.glb", {
+      loadGLTFModel(scene, "/notebook.glb", {
         receiveShadow: false,
         castShadow: false,
       }).then(() => {
@@ -106,7 +106,6 @@ const VoxelDog = () => {
       };
 
       return () => {
-        console.log("unmount");
         cancelAnimationFrame(req || 0);
         renderer.dispose();
       };
@@ -121,8 +120,8 @@ const VoxelDog = () => {
   }, [renderer, handleWindowResize]);
 
   return (
-    <DogContainer ref={refContainer}>{loading && <DogSpinner />}</DogContainer>
+    <NotebookContainer ref={refContainer}>
+      {loading && <NotebookSpinner />}
+    </NotebookContainer>
   );
-};
-
-export default VoxelDog;
+}
