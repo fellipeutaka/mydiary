@@ -4,25 +4,25 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { loadGLTFModel } from "lib/model";
 import { DogSpinner, DogContainer } from "./voxel-dog-loader";
 
-function easeOutCirc(x) {
+function easeOutCirc(x: number) {
   return Math.sqrt(1 - Math.pow(x - 1, 4));
 }
 
 const VoxelDog = () => {
-  const refContainer = useRef();
+  const refContainer = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState(true);
-  const [renderer, setRenderer] = useState();
-  const [_camera, setCamera] = useState();
+  const [renderer, setRenderer] = useState<THREE.WebGLRenderer>();
+  const [_camera, setCamera] = useState<THREE.OrthographicCamera>();
   const [target] = useState(new THREE.Vector3(-0.5, 1.2, 0));
   const [initialCameraPosition] = useState(
     new THREE.Vector3(
-      20 * Math.sin(0.2 * Math.PI),
+      10 * Math.sin(0.1 * Math.PI),
       10,
-      20 * Math.cos(0.2 * Math.PI)
+      15 * Math.cos(0.1 * Math.PI)
     )
   );
   const [scene] = useState(new THREE.Scene());
-  const [_controls, setControls] = useState();
+  const [_controls, setControls] = useState<OrbitControls>();
 
   const handleWindowResize = useCallback(() => {
     const { current: container } = refContainer;
@@ -34,7 +34,6 @@ const VoxelDog = () => {
     }
   }, [renderer]);
 
-  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     const { current: container } = refContainer;
     if (container && !renderer) {
@@ -82,7 +81,7 @@ const VoxelDog = () => {
         setLoading(false);
       });
 
-      let req = null;
+      let req: null | number = null;
       let frame = 0;
       const animate = () => {
         req = requestAnimationFrame(animate);
@@ -108,11 +107,11 @@ const VoxelDog = () => {
 
       return () => {
         console.log("unmount");
-        cancelAnimationFrame(req);
+        cancelAnimationFrame(req || 0);
         renderer.dispose();
       };
     }
-  }, []);
+  }, [initialCameraPosition, renderer, scene, target]);
 
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize, false);
