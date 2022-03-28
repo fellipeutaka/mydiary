@@ -1,8 +1,9 @@
+import { Group } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export function loadGLTFModel(
-  scene,
-  glbPath,
+  scene: Group,
+  glbPath: string,
   options = { receiveShadow: true, castShadow: true }
 ) {
   const { receiveShadow, castShadow } = options;
@@ -20,8 +21,8 @@ export function loadGLTFModel(
         obj.castShadow = castShadow;
         scene.add(obj);
 
-        obj.traverse(function (child) {
-          if (child.isMesh) {
+        obj.traverse((child) => {
+          if ((<THREE.Mesh>child).isMesh) {
             child.castShadow = castShadow;
             child.receiveShadow = receiveShadow;
           }
