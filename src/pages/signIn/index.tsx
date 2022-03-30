@@ -8,7 +8,7 @@ export default function SignIn() {
       <Head>
         <title>Sign In | My Diary</title>
         <meta name="description" content="My Diary" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/logo.png" />
       </Head>
 
       <Flex

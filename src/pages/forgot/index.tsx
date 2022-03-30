@@ -28,7 +28,7 @@ export default function Forgot() {
       <Head>
         <title>Recover your password | My Diary</title>
         <meta name="description" content="My Diary" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" href="/logo.png" />
       </Head>
 
       <Flex
