@@ -1,9 +1,11 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import NextLink from "next/link";
 
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Flex, Heading, Link, Text } from "@chakra-ui/react";
 import Navbar from "components/Navbar";
 import VoxelNotebookLoader from "components/3D/NotebookLoader";
+import Section from "components/Section";
 
 const LazyVoxelNotebook = dynamic(() => import("components/3D/Notebook"), {
   ssr: false,
@@ -39,25 +41,31 @@ export default function Home() {
           </Text>
         </Box>
       </Flex>
-      <Flex
-        as="section"
-        w="100%"
-        justifyContent="center"
-        alignItems="center"
-        flexDir="column"
-        textAlign="center"
-        px={6}
-      >
-        <Heading as="h1" mb={[2, 4]} size="xl" lineHeight="48px">
+      <Section delay={0.1}>
+        <Heading as="h1" size="xl" lineHeight="48px">
           It&apos;s more than a simply diary. It&apos;s a digital security
           diary.
         </Heading>
-        <Text fontSize="xl" maxW={["100%", "55%"]}>
+        <Text fontSize="xl" maxW={["100%", "55%"]} my={[2, 4]}>
           Start with My Diary. Personalize your diary with photos and audios.
           Manage your days. Organize your notes. Remember your goals everyday -
           all in one place.
         </Text>
-      </Flex>
+        <NextLink href="/signIn" passHref>
+          <Link
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            borderRadius={6}
+            h={12}
+            px={6}
+            bgColor="blue.500"
+            _hover={{ backgroundColor: "blue.400" }}
+          >
+            Start your diary
+          </Link>
+        </NextLink>
+      </Section>
     </>
   );
 }
