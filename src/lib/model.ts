@@ -1,8 +1,8 @@
-import { Group } from "three";
+import { Scene } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export function loadGLTFModel(
-  scene: Group,
+  scene: Scene,
   glbPath: string,
   options = { receiveShadow: true, castShadow: true }
 ) {

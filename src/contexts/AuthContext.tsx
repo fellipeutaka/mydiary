@@ -205,6 +205,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
+    const renderCustomScrollbar = () =>
+      document.head.insertAdjacentHTML(
+        "beforeend",
+        `<style>
+          ::-webkit-scrollbar {
+            width: 8px;
+          }
+          ::-webkit-scrollbar-track {
+            background-color: #f0f0f0;
+          }
+          ::-webkit-scrollbar-thumb {
+            background-color: #747373;
+          }
+        </style>`
+      );
+
+    renderCustomScrollbar();
+
     const unsubscribe = onIdTokenChanged(auth, (user) => {
       setUser(user ? user : null);
     });
