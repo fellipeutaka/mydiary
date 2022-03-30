@@ -26,12 +26,11 @@ export default function Home() {
         justifyContent="center"
         alignItems="center"
         flexDir={["column", "row"]}
-        gap={[0, 6]}
         mb={[16, 32]}
       >
         <LazyVoxelNotebook />
-        <Box maxW={["100%", "25%"]} textAlign={["center", "left"]}>
-          <Heading as="h1" mb={6} size="2xl" lineHeight="60px">
+        <Box maxW={["100%", "25%"]} textAlign={["center", "left"]} px={6}>
+          <Heading as="h1" mb={[4, 6]} size="2xl" lineHeight="60px">
             My Diary is your digital diary.
           </Heading>
           <Text fontSize="xl">
@@ -49,7 +48,7 @@ export default function Home() {
         textAlign="center"
         px={6}
       >
-        <Heading as="h1" mb={4} size="xl" lineHeight="48px">
+        <Heading as="h1" mb={[2, 4]} size="xl" lineHeight="48px">
           It&apos;s more than a simply diary. It&apos;s a digital security
           diary.
         </Heading>
