@@ -6,7 +6,7 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/fellipeutaka/mydiary?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/fellipeutaka/mydiary?style=for-the-badge)
 
-<img src="https://prnt.sc/oKV2Qbv-xzUQ" alt="Homepage Screenshot">
+<img src="https://user-images.githubusercontent.com/68625746/160987371-f35aac27-de11-4e50-83fd-753fd0046821.png" alt="Homepage Screenshot">
 
 ### Adjustments and improvements
 
@@ -37,9 +37,9 @@ The project is still in development and the next updates will focus on the follo
 To contribute to My Diary, follow these steps:
 
 1. Fork this repository.
-2. Create a branch: `git checkout -b <nome_branch>`.
-3. Make your changes and commit them: `git commit -m '<mensagem_commit>'`
-4. Push to original branch: `git push origin <nome_do_projeto> / <local>`
+2. Create a branch: `git checkout -b <branch_name>`.
+3. Make your changes and commit them: `git commit -m '<commit_message>'`
+4. Push to original branch: `git push origin <project_name> / <local>`
 5. Create the pull request.
 
 Or, see the GitHub documentation on [how to create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
@@ -47,7 +47,7 @@ Or, see the GitHub documentation on [how to create a pull request](https://help.
 ## 🤝 Collaborators
 
 We thank the following people who contributed to this project:
-<a href="#" align="center">
+<a href="https://github.com/FellipeUtaka">
   <img src="https://github.com/fellipeutaka.png" width="100px;" alt="Fellipe Utaka display photo"/><br>
   <sub>
     <b>Fellipe Utaka</b>
