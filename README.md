@@ -47,9 +47,15 @@ Or, see the GitHub documentation on [how to create a pull request](https://help.
 ## 🤝 Collaborators
 
 We thank the following people who contributed to this project:
-<a href="https://github.com/FellipeUtaka">
-  <img src="https://github.com/fellipeutaka.png" width="100px;" alt="Fellipe Utaka display photo"/><br>
-  <sub>
-    <b>Fellipe Utaka</b>
-  </sub>
-</a>
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/FellipeUtaka">
+        <img src="https://github.com/fellipeutaka.png" width="100px;" alt="Fellipe Utaka display photo"/><br>
+        <sub>
+          <b>Fellipe Utaka</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
