@@ -60,6 +60,7 @@ export default function Forgot() {
             my={6}
             w="100%"
             h={12}
+            color="#fff"
             bgColor="blue.500"
             _hover={{ backgroundColor: "blue.400" }}
             isLoading={loading}
