@@ -6,6 +6,8 @@ import { Box, Flex, Heading, Link, Text } from "@chakra-ui/react";
 import Navbar from "components/Navbar";
 import VoxelNotebookLoader from "components/3D/NotebookLoader";
 import Section from "components/Section";
+import Image from "next/image";
+import Footer from "components/Footer";
 
 const LazyVoxelNotebook = dynamic(() => import("components/3D/Notebook"), {
   ssr: false,
@@ -65,7 +67,14 @@ export default function Home() {
             Start your diary
           </Link>
         </NextLink>
+        <Image
+          src="/board.png"
+          width="1110px"
+          height="778.5px"
+          alt="Board UI"
+        />
       </Section>
+      <Footer />
     </>
   );
 }
