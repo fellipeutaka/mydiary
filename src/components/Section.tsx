@@ -17,7 +17,9 @@ export default function Section({ children, delay = 0 }: SectionProps) {
   useEffect(() => {
     if (inView) {
       controls.start("visible");
-    }
+    } /* else {
+      controls.start("hidden");
+    } */
   }, [controls, inView]);
 
   const sectionVariants = {
