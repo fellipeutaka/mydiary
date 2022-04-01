@@ -2,7 +2,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { loadGLTFModel } from "lib/model";
-import { NotebookSpinner, NotebookContainer } from "./NotebookLoader";
+import { NotebookContainer } from "./NotebookLoader";
+import Spinner from "components/Spinner";
 
 function easeOutCirc(x: number) {
   return Math.sqrt(1 - Math.pow(x - 1, 4));
@@ -121,7 +122,7 @@ export default function VoxelNotebook() {
 
   return (
     <NotebookContainer ref={refContainer}>
-      {loading && <NotebookSpinner />}
+      {loading && <Spinner />}
     </NotebookContainer>
   );
 }

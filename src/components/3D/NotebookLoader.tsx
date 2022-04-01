@@ -1,16 +1,6 @@
 import { forwardRef } from "react";
-import { Box, Spinner } from "@chakra-ui/react";
-
-export const NotebookSpinner = () => (
-  <Spinner
-    size="xl"
-    position="absolute"
-    left="50%"
-    top="50%"
-    ml="calc(0px - var(--spinner-size) / 2)"
-    mt="calc(0px - var(--spinner-size))"
-  />
-);
+import { Box } from "@chakra-ui/react";
+import Spinner from "components/Spinner";
 
 export const NotebookContainer = forwardRef<
   HTMLDivElement,
@@ -30,7 +20,7 @@ NotebookContainer.displayName = "NotebookContainer";
 
 const Loader = () => (
   <NotebookContainer>
-    <NotebookSpinner />
+    <Spinner />
   </NotebookContainer>
 );
 
