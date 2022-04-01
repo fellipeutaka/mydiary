@@ -1,7 +1,7 @@
 import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import Image from "next/image";
 import NextLink from "next/link";
-import ThemeToggleButton from "./Controllers/ThemeToggleButton";
+import ThemeToggleButton from "../Controllers/ThemeToggleButton";
 
 export default function Navbar() {
   return (

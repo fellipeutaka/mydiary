@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { Box } from "@chakra-ui/react";
-import Spinner from "components/Spinner";
+import Spinner from "components/General/Spinner";
 
 export const NotebookContainer = forwardRef<
   HTMLDivElement,

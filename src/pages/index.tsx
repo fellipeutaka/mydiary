@@ -3,11 +3,11 @@ import dynamic from "next/dynamic";
 import NextLink from "next/link";
 
 import { Box, Flex, Heading, Link, Text } from "@chakra-ui/react";
-import Navbar from "components/Navbar";
+import Navbar from "components/General/Navbar";
 import VoxelNotebookLoader from "components/3D/NotebookLoader";
-import Section from "components/Section";
+import Section from "components/General/Section";
 import Image from "next/image";
-import Footer from "components/Footer";
+import Footer from "components/General/Footer";
 import { HomeDocument, useHomeQuery } from "generated/graphql";
 import { GetStaticProps } from "next";
 import { client, ssrCache } from "lib/urql";
@@ -48,7 +48,7 @@ export default function Home() {
         <Heading as="h1" size="xl" lineHeight="48px">
           {data?.page?.sectionTitle}
         </Heading>
-        <Text fontSize="xl" maxW={["100%", "55%"]} my={[2, 4]}>
+        <Text fontSize="xl" maxW={["100%", "55%"]}>
           {data?.page?.sectionDescription}
         </Text>
         <NextLink href="/signIn" passHref>

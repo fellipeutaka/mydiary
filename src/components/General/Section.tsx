@@ -36,6 +36,7 @@ export default function Section({ children, delay = 0 }: SectionProps) {
       flexDir="column"
       textAlign="center"
       px={6}
+      gap={[4, 6]}
       ref={ref}
       animate={controls}
       initial="hidden"
