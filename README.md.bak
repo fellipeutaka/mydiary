@@ -18,8 +18,6 @@ The project is still in development and the next updates will focus on the follo
 - [x] Forgot password
 - [x] ReCaptcha Sign Up
 - [x] Home page (Three.js, Parallax, Animations, GraphCMS, ISR)
-- [ ] Validate Captcha Token
-- [ ] Validate JWT Token
 - [ ] Database
 - [ ] Record audios
 - [ ] Upload images

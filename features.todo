@@ -2,11 +2,7 @@
 ✔ Private and public routes @done(22-03-26 02:25)
 ✔ Forgot password @done(22-03-26 02:25)
 ✔ ReCaptcha Sign Up @done(22-03-26 02:25)
-☐ Home page
-    - Three.js (3D)
-    - Parallax
-    - Animations
-☐ Home page content with GraphCMS and ISR
+✔ Home page content with GraphCMS and ISR @done(22-04-01 02:50)
 ✔ Validate Forms @high @done(22-03-26 19:59)
 ☐ Validate Captcha Token @high
 ☐ Validate JWT Token @high

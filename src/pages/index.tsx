@@ -8,6 +8,9 @@ import VoxelNotebookLoader from "components/3D/NotebookLoader";
 import Section from "components/Section";
 import Image from "next/image";
 import Footer from "components/Footer";
+import { HomeDocument, useHomeQuery } from "generated/graphql";
+import { GetStaticProps } from "next";
+import { client, ssrCache } from "lib/urql";
 
 const LazyVoxelNotebook = dynamic(() => import("components/3D/Notebook"), {
   ssr: false,
@@ -15,6 +18,7 @@ const LazyVoxelNotebook = dynamic(() => import("components/3D/Notebook"), {
 });
 
 export default function Home() {
+  const [{ data }] = useHomeQuery();
   return (
     <>
       <Head>
@@ -35,23 +39,17 @@ export default function Home() {
         <LazyVoxelNotebook />
         <Box maxW={["100%", "25%"]} textAlign={["center", "left"]} px={6}>
           <Heading as="h1" mb={[4, 6]} size="2xl" lineHeight="60px">
-            My Diary is your digital diary.
+            {data?.page?.title}
           </Heading>
-          <Text fontSize="xl">
-            Keep your thoughts organized. Improve your writing. Set and achieve
-            your goals. Allow yourself to self-reflect. Inspire creativity.
-          </Text>
+          <Text fontSize="xl">{data?.page?.description}</Text>
         </Box>
       </Flex>
       <Section delay={0.1}>
         <Heading as="h1" size="xl" lineHeight="48px">
-          It&apos;s more than a simply diary. It&apos;s a digital security
-          diary.
+          {data?.page?.sectionTitle}
         </Heading>
         <Text fontSize="xl" maxW={["100%", "55%"]} my={[2, 4]}>
-          Start with My Diary. Personalize your diary with photos and audios.
-          Manage your days. Organize your notes. Remember your goals everyday -
-          all in one place.
+          {data?.page?.sectionDescription}
         </Text>
         <NextLink href="/signIn" passHref>
           <Link
@@ -68,9 +66,10 @@ export default function Home() {
           </Link>
         </NextLink>
         <Image
-          src="/board.png"
+          src={data!.page!.image.url}
           width="1110px"
           height="778.5px"
+          quality={100}
           alt="Board UI"
         />
       </Section>
@@ -78,3 +77,15 @@ export default function Home() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  await client.query(HomeDocument).toPromise();
+
+  return {
+    props: {
+      urqlState: ssrCache.extractData(),
+    },
+
+    revalidate: 1 * 60, // 1 minute
+  };
+};

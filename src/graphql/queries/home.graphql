@@ -1,0 +1,11 @@
+query Home {
+  page(where: { id: "cl1fy89mh7ftd0bizn0yl65qw" }) {
+    title
+    description
+    sectionTitle
+    sectionDescription
+    image {
+      url(transformation: { image: { resize: { height: 778, width: 1110 } } })
+    }
+  }
+}
