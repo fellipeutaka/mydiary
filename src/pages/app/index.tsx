@@ -1,9 +1,17 @@
 import Head from "next/head";
-import { Button } from "@chakra-ui/react";
+import { Button, Input, Textarea } from "@chakra-ui/react";
 import { useAuth } from "hooks/useAuth";
+import { Data } from "types/Data";
 
 export default function App() {
+  const date = new Date();
+  const today = date.toLocaleString("us", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
   const { user, authMethods } = useAuth();
+
   return (
     <>
       <Head>
@@ -15,9 +23,10 @@ export default function App() {
       <header>
         <h1>App</h1>
         <h1>Hello {user?.displayName}</h1>
+        <Button onClick={authMethods.signOut}>Sign Out</Button>
       </header>
       <main>
-        <Button onClick={authMethods.signOut}>Sign Out</Button>
+        <h1>{today}.</h1>
       </main>
     </>
   );
