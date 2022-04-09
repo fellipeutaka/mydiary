@@ -3,7 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 export async function middleware(req: NextRequest) {
   const token = req.cookies["MyDiary-token"];
   const response = await fetch(
-    "http://localhost:3000/api/ensureAuthenticated",
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/api/ensureAuthenticated"
+      : "https://my-diary-online.vercel.app/api/ensureAuthenticated",
     {
       headers: {
         Authorization: `Bearer ${token}`,
