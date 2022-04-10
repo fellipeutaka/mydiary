@@ -43,7 +43,7 @@ export default function Header() {
         </Button>
       </Stack>
 
-      <Flex alignItems="center">
+      <Flex alignItems="center" display={["none", "flex"]}>
         <Image src="/logo.png" alt="My Diary logo" width="48px" height="48px" />
         <Text fontWeight="bold">My Diary</Text>
       </Flex>

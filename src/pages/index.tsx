@@ -33,11 +33,15 @@ export default function Home() {
         w="100%"
         justifyContent="center"
         alignItems="center"
-        flexDir={["column", "row"]}
+        flexDir={["column", "column", "row"]}
         mb={[16, 32]}
       >
         <LazyVoxelNotebook />
-        <Box maxW={["100%", "25%"]} textAlign={["center", "left"]} px={6}>
+        <Box
+          maxW={["100%", "100%", "25%"]}
+          textAlign={["center", "center", "left"]}
+          px={6}
+        >
           <Heading as="h1" mb={[4, 6]} size="2xl" lineHeight="60px">
             {data?.page?.title}
           </Heading>
