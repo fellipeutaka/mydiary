@@ -90,7 +90,7 @@ export default function SignInForm() {
       <Button
         h={12}
         onClick={authMethods.signInWithGoogle}
-        leftIcon={<FcGoogle />}
+        leftIcon={<FcGoogle fontSize={24} />}
       >
         Google
       </Button>

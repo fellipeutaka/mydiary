@@ -1,22 +1,24 @@
 import Head from "next/head";
-import NextLink from "next/link";
-import { Avatar, Button, Flex, Stack, Tooltip } from "@chakra-ui/react";
+import {
+  Avatar,
+  Button,
+  Flex,
+  Modal,
+  Stack,
+  Tooltip,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { useAuth } from "hooks/useAuth";
 import { Note } from "types/Note";
 import { addNotes, notesCollection } from "utils/notes";
 import { useEffect, useState } from "react";
 import { onSnapshot } from "firebase/firestore";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineUser } from "react-icons/ai";
 import { IoHomeOutline, IoExitOutline } from "react-icons/io5";
+import AddNote from "components/Forms/AddNote";
+import Header from "components/General/Header";
 
 export default function App() {
-  const date = new Date();
-  const today = date.toLocaleString("us", {
-    weekday: "long",
-    month: "long",
-    day: "numeric",
-  });
-  const { user, authMethods } = useAuth();
   interface NotesState extends Note {
     id: string;
   }
@@ -49,44 +51,15 @@ export default function App() {
         <meta name="description" content="My Diary" />
         <link rel="icon" type="image/png" href="/logo.png" />
       </Head>
-
-      <Flex
-        as="header"
-        h="68px"
-        justifyContent="space-between"
-        alignItems="center"
-        px={6}
-      >
-        <NextLink href="/app" passHref>
-          <Button>
-            <IoHomeOutline />
-          </Button>
-        </NextLink>
-        <Stack direction="row" alignItems="center">
-          <Button onClick={handleAddNote}>
-            <AiOutlinePlus />
-          </Button>
-          <Tooltip label={user?.displayName}>
-            <Avatar name={user?.displayName || ""} src={user?.photoURL || ""} />
-          </Tooltip>
-          <Button onClick={authMethods.signOut}>
-            <IoExitOutline />
-          </Button>
-        </Stack>
-      </Flex>
+      <Header />
       <main>
-        <h1>{today}.</h1>
-        <div>
-          {notes.map((note) => (
-            <div key={note.id}>
-              <h1>{note.title}</h1>
-              <p>{note.content}</p>
-              <span>
-                {note.created_at.toDate().toLocaleDateString("en-US")}
-              </span>
-            </div>
-          ))}
-        </div>
+        {notes.map((note) => (
+          <div key={note.id}>
+            <h1>{note.title}</h1>
+            <p>{note.content}</p>
+            <span>{note.created_at.toDate().toLocaleDateString("en-US")}</span>
+          </div>
+        ))}
       </main>
     </>
   );
