@@ -9,8 +9,9 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { EmailIcon, LockIcon } from "@chakra-ui/icons";
-import { GoogleIcon } from "components/Icons";
+import { AiOutlineMail } from "react-icons/ai";
+import { BiLock } from "react-icons/bi";
+import { FcGoogle } from "react-icons/fc";
 import { FormEvent, useState } from "react";
 import { useAuth } from "hooks/useAuth";
 
@@ -39,7 +40,7 @@ export default function SignInForm() {
       >
         <InputGroup>
           <InputLeftElement pointerEvents="none" mt="3px">
-            <EmailIcon color="gray.300" />
+            <AiOutlineMail color="gray.300" />
           </InputLeftElement>
           <Input
             type="text"
@@ -52,7 +53,7 @@ export default function SignInForm() {
         </InputGroup>
         <InputGroup>
           <InputLeftElement pointerEvents="none" mt="3px">
-            <LockIcon color="gray.300" />
+            <BiLock color="gray.300" />
           </InputLeftElement>
           <Input
             type="password"
@@ -89,7 +90,7 @@ export default function SignInForm() {
       <Button
         h={12}
         onClick={authMethods.signInWithGoogle}
-        leftIcon={<GoogleIcon w={8} h={8} />}
+        leftIcon={<FcGoogle />}
       >
         Google
       </Button>

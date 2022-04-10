@@ -1,7 +1,17 @@
 import Head from "next/head";
-import { Button, Input, Textarea } from "@chakra-ui/react";
+import {
+  Avatar,
+  Button,
+  Flex,
+  Input,
+  Textarea,
+  Tooltip,
+} from "@chakra-ui/react";
 import { useAuth } from "hooks/useAuth";
-import { Data } from "types/Data";
+import { Note } from "types/Note";
+import { addNotes, notesCollection } from "utils/notes";
+import { useEffect, useState } from "react";
+import { onSnapshot } from "firebase/firestore";
 
 export default function App() {
   const date = new Date();
@@ -11,6 +21,26 @@ export default function App() {
     day: "numeric",
   });
   const { user, authMethods } = useAuth();
+  interface NotesState extends Note {
+    id: string;
+  }
+  const [notes, setNotes] = useState<NotesState[]>([]);
+  useEffect(() => {
+    (async () => {
+      const unsub = onSnapshot(notesCollection, (doc) => {
+        const data: NotesState[] = [];
+        doc.forEach((note) => {
+          const notes = {
+            ...note.data(),
+            id: note.id,
+          };
+          data.push(notes);
+        });
+        setNotes(data);
+      });
+      return () => unsub();
+    })();
+  }, []);
 
   return (
     <>
@@ -20,13 +50,32 @@ export default function App() {
         <link rel="icon" type="image/png" href="/logo.png" />
       </Head>
 
-      <header>
-        <h1>App</h1>
-        <h1>Hello {user?.displayName}</h1>
+      <Flex
+        as="header"
+        h="68px"
+        justifyContent="space-between"
+        alignItems="center"
+        px={6}
+      >
+        <Button></Button>
+        <Tooltip label={user?.displayName}>
+          <Avatar name={user?.displayName || ""} src={user?.photoURL || ""} />
+        </Tooltip>
         <Button onClick={authMethods.signOut}>Sign Out</Button>
-      </header>
+      </Flex>
       <main>
         <h1>{today}.</h1>
+        <div>
+          {notes.map((note) => (
+            <div key={note.id}>
+              <h1>{note.title}</h1>
+              <p>{note.content}</p>
+              <span>
+                {note.created_at.toDate().toLocaleDateString("en-US")}
+              </span>
+            </div>
+          ))}
+        </div>
       </main>
     </>
   );

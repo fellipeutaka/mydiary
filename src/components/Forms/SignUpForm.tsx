@@ -10,8 +10,9 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { EmailIcon, LockIcon, ArrowBackIcon } from "@chakra-ui/icons";
-import { UserIcon } from "components/Icons";
+import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
+import { BiLock } from "react-icons/bi";
+import { BsArrowLeft } from "react-icons/bs";
 import ReCAPTCHA from "react-google-recaptcha";
 
 export default function SignUpForm() {
@@ -41,7 +42,7 @@ export default function SignUpForm() {
     >
       <InputGroup>
         <InputLeftElement pointerEvents="none" mt="3px">
-          <UserIcon color="gray.300" />
+          <AiOutlineUser color="gray.300" />
         </InputLeftElement>
         <Input
           type="text"
@@ -54,7 +55,7 @@ export default function SignUpForm() {
       </InputGroup>
       <InputGroup>
         <InputLeftElement pointerEvents="none" mt="3px">
-          <EmailIcon color="gray.300" />
+          <AiOutlineMail color="gray.300" />
         </InputLeftElement>
         <Input
           type="text"
@@ -67,7 +68,7 @@ export default function SignUpForm() {
       </InputGroup>
       <InputGroup>
         <InputLeftElement pointerEvents="none" mt="3px">
-          <LockIcon color="gray.300" />
+          <BiLock color="gray.300" />
         </InputLeftElement>
         <Input
           type="password"
@@ -100,14 +101,17 @@ export default function SignUpForm() {
         <Link
           fontSize="sm"
           fontWeight="bold"
-          display="block"
-          w="max-content"
           marginX="auto"
-          verticalAlign="middle"
           color="blue.500"
           _hover={{ color: "blue.400" }}
         >
-          <ArrowBackIcon w={5} h={5} mr={2} my={1} />
+          <BsArrowLeft
+            style={{
+              display: "inline-block",
+              verticalAlign: "middle",
+              marginRight: 4,
+            }}
+          />
           Back to Sign In
         </Link>
       </NextLink>

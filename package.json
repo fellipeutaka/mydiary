@@ -14,7 +14,6 @@
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
-    "@chakra-ui/icons": "^1.1.7",
     "@chakra-ui/react": "^1.8.6",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
@@ -27,6 +26,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-google-recaptcha": "^2.1.0",
+    "react-icons": "^4.3.1",
     "react-intersection-observer": "^8.33.1",
     "three": "^0.139.0",
     "urql": "^2.2.0"

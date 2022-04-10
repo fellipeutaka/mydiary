@@ -11,7 +11,7 @@ import {
   InputLeftElement,
   Link,
 } from "@chakra-ui/react";
-import { EmailIcon } from "@chakra-ui/icons";
+import { AiOutlineMail } from "react-icons/ai";
 
 export default function Forgot() {
   const [email, setEmail] = useState("");
@@ -45,7 +45,7 @@ export default function Forgot() {
           </Heading>
           <InputGroup>
             <InputLeftElement pointerEvents="none" mt="3px">
-              <EmailIcon color="gray.300" />
+              <AiOutlineMail color="gray.300" />
             </InputLeftElement>
             <Input
               type="text"
