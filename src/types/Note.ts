@@ -5,4 +5,5 @@ export type Note = {
   content: string;
   created_at: Timestamp;
   favorited: boolean;
+  id: string;
 };

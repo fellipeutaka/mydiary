@@ -13,11 +13,11 @@ import {
 import { Note } from "types/Note";
 import { UserDocumentData } from "types/UserDocumentData";
 
-function createCollection<T = DocumentData>(collectionName: string) {
+export function createCollection<T = DocumentData>(collectionName: string) {
   return collection(firestore, collectionName) as CollectionReference<T>;
 }
 
-function createUserDocumentRef<T = DocumentData>(uid: string) {
+export function createUserDocumentRef<T = DocumentData>(uid: string) {
   return doc(firestore, "users", uid) as DocumentReference<T>;
 }
 

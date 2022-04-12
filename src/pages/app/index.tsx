@@ -1,48 +1,36 @@
 import Head from "next/head";
-import {
-  Avatar,
-  Button,
-  Flex,
-  Modal,
-  Stack,
-  Tooltip,
-  useDisclosure,
-} from "@chakra-ui/react";
 import { useAuth } from "hooks/useAuth";
 import { Note } from "types/Note";
 import { useEffect, useState } from "react";
 import { onSnapshot } from "firebase/firestore";
-import { AiOutlinePlus, AiOutlineUser } from "react-icons/ai";
-import { IoHomeOutline, IoExitOutline } from "react-icons/io5";
-import AddNote from "components/Forms/AddNote";
 import Header from "components/General/Header";
+import { createUserDocumentRef } from "utils/notes";
+import { UserDocumentData } from "types/UserDocumentData";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 export default function App() {
+  const [notes, setNotes] = useState<Note[]>([]);
   const { user } = useAuth();
-  interface NotesState extends Note {
-    id: string;
-  }
 
   function handleAddNote() {
     console.log("Add note");
   }
-  const [notes, setNotes] = useState<NotesState[]>([]);
-  // useEffect(() => {
-  //   (async () => {
-  //     const unsub = onSnapshot(notesCollection, (doc) => {
-  //       const data: NotesState[] = [];
-  //       doc.forEach((note) => {
-  //         const notes = {
-  //           ...note.data(),
-  //           id: note.id,
-  //         };
-  //         data.push(notes);
-  //       });
-  //       setNotes(data);
-  //     });
-  //     return () => unsub();
-  //   })();
-  // }, []);
+
+  useEffect(() => {
+    (async () => {
+      if (user) {
+        const unsub = onSnapshot(
+          createUserDocumentRef<UserDocumentData>(user.uid),
+          (doc) => {
+            if (doc.data()?.notes) {
+              setNotes(doc.data()!.notes);
+            }
+          }
+        );
+        return () => unsub();
+      }
+    })();
+  }, [user]);
 
   return (
     <>
@@ -57,7 +45,8 @@ export default function App() {
           <div key={note.id}>
             <h1>{note.title}</h1>
             <p>{note.content}</p>
-            <span>{note.created_at.toDate().toLocaleDateString("en-US")}</span>
+            <span>{note.created_at.toDate().toLocaleDateString()}</span>
+            {note.favorited ? <AiFillHeart /> : <AiOutlineHeart />}
           </div>
         ))}
       </main>
