@@ -99,6 +99,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         status: "error",
       });
     }
+
+    const captchaResponse = await fetch(
+      process.env.NODE_ENV === "development"
+        ? `http://localhost:3000/api/validateCaptcha?response=${captchaToken}`
+        : `https://my-diary-online.vercel.app/api/validateCaptcha?response=${captchaToken}`,
+      {
+        method: "POST",
+      }
+    );
+
+    if (!captchaResponse.ok) {
+      return toast({
+        title: "Error",
+        description: "Invalid captcha, try again please",
+        status: "error",
+      });
+    }
+
     try {
       const { user } = await FirebaseCreateUserWithEmailAndPassword(
         auth,

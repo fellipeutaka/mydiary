@@ -3,9 +3,9 @@
 ✔ Forgot password @done(22-03-26 02:25)
 ✔ ReCaptcha Sign Up @done(22-03-26 02:25)
 ✔ Home page content with GraphCMS and ISR @done(22-04-01 02:50)
-✔ Validate Forms @high @done(22-03-26 19:59)
-☐ Validate Captcha Token @high
-✔ Validate JWT Token @high @done(22-04-09 17:42)
+✔ Validate Forms @done(22-03-26 19:59)
+✔ Validate Captcha Token @done(22-04-12 11:40)
+✔ Validate JWT Token @done(22-04-09 17:42)
 ☐ Database
 ☐ Record audios
 ☐ Upload images

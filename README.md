@@ -11,14 +11,14 @@
 ### Adjustments and improvements
 
 The project is still in development and the next updates will focus on the following tasks:
- 
+
 - [x] OAuth (Google)
 - [x] Private and public routes
 - [x] Validate Forms
 - [x] Forgot password
 - [x] ReCaptcha Sign Up
 - [x] Home page (Three.js, Parallax, Animations, GraphCMS, ISR)
-- [ ] Validate Captcha Token
+- [x] Validate Captcha Token
 - [x] Validate JWT Token
 - [ ] Database
 - [ ] Record audios
@@ -49,6 +49,7 @@ Or, see the GitHub documentation on [how to create a pull request](https://help.
 ## 🤝 Collaborators
 
 We thank the following people who contributed to this project:
+
 <table>
   <tr>
     <td align="center">
