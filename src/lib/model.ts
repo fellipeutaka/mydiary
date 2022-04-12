@@ -14,7 +14,7 @@ export function loadGLTFModel(
       glbPath,
       (gltf) => {
         const obj = gltf.scene;
-        obj.name = "dog";
+        obj.name = "notebook";
         obj.position.y = 0;
         obj.position.x = 0;
         obj.receiveShadow = receiveShadow;
@@ -30,7 +30,7 @@ export function loadGLTFModel(
         resolve(obj);
       },
       undefined,
-      function (error) {
+      (error) => {
         reject(error);
       }
     );

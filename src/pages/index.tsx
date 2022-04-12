@@ -2,7 +2,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import NextLink from "next/link";
 
-import { Box, Flex, Heading, Link, Text } from "@chakra-ui/react";
+import { Box, Heading, Link, Text } from "@chakra-ui/react";
 import Navbar from "components/General/Navbar";
 import VoxelNotebookLoader from "components/3D/NotebookLoader";
 import Section from "components/General/Section";
@@ -11,6 +11,7 @@ import Footer from "components/General/Footer";
 import { HomeDocument, useHomeQuery } from "generated/graphql";
 import { GetStaticProps } from "next";
 import { client, ssrCache } from "lib/urql";
+import HomeMain from "components/General/HomeMain";
 
 const LazyVoxelNotebook = dynamic(() => import("components/3D/Notebook"), {
   ssr: false,
@@ -28,14 +29,7 @@ export default function Home() {
       </Head>
 
       <Navbar />
-      <Flex
-        as="main"
-        w="100%"
-        justifyContent="center"
-        alignItems="center"
-        flexDir={["column", "column", "row"]}
-        mb={[16, 32]}
-      >
+      <HomeMain>
         <LazyVoxelNotebook />
         <Box
           maxW={["100%", "100%", "25%"]}
@@ -47,8 +41,8 @@ export default function Home() {
           </Heading>
           <Text fontSize="xl">{data?.page?.description}</Text>
         </Box>
-      </Flex>
-      <Section delay={0.1}>
+      </HomeMain>
+      <Section delay={0.2}>
         <Heading as="h1" size="xl" lineHeight="48px">
           {data?.page?.sectionTitle}
         </Heading>

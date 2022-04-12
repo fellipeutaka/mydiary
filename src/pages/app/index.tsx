@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import { useAuth } from "hooks/useAuth";
 import { Note } from "types/Note";
-import { addNotes, notesCollection } from "utils/notes";
 import { useEffect, useState } from "react";
 import { onSnapshot } from "firebase/firestore";
 import { AiOutlinePlus, AiOutlineUser } from "react-icons/ai";
@@ -19,6 +18,7 @@ import AddNote from "components/Forms/AddNote";
 import Header from "components/General/Header";
 
 export default function App() {
+  const { user } = useAuth();
   interface NotesState extends Note {
     id: string;
   }
@@ -27,22 +27,22 @@ export default function App() {
     console.log("Add note");
   }
   const [notes, setNotes] = useState<NotesState[]>([]);
-  useEffect(() => {
-    (async () => {
-      const unsub = onSnapshot(notesCollection, (doc) => {
-        const data: NotesState[] = [];
-        doc.forEach((note) => {
-          const notes = {
-            ...note.data(),
-            id: note.id,
-          };
-          data.push(notes);
-        });
-        setNotes(data);
-      });
-      return () => unsub();
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const unsub = onSnapshot(notesCollection, (doc) => {
+  //       const data: NotesState[] = [];
+  //       doc.forEach((note) => {
+  //         const notes = {
+  //           ...note.data(),
+  //           id: note.id,
+  //         };
+  //         data.push(notes);
+  //       });
+  //       setNotes(data);
+  //     });
+  //     return () => unsub();
+  //   })();
+  // }, []);
 
   return (
     <>

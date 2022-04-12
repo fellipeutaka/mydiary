@@ -21,6 +21,7 @@ import {
   validatePassword,
 } from "utils/validateFields";
 import { verifyErrorCode } from "utils/verifyErrorCode";
+import { addUsers, isANewUser } from "utils/notes";
 
 type AuthMethodsType = {
   createUserWithEmailAndPassword(
@@ -107,6 +108,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const token = await user.getIdToken();
       await updateProfile(user, { displayName: name });
       console.log(user);
+      await addUsers(user.uid);
       setCookie(undefined, "MyDiary-token", token, {
         maxAge: 60 * 60 * 1, // 1 hour
       });
@@ -163,6 +165,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const { user } = await signInWithPopup(auth, provider);
       const token = await user.getIdToken();
       console.log(user);
+      const newUser = await isANewUser(user.uid);
+      if (newUser) {
+        await addUsers(user.uid);
+      }
       setCookie(undefined, "MyDiary-token", token, {
         maxAge: 60 * 60 * 1, // 1 hour
       });

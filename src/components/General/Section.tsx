@@ -1,12 +1,12 @@
 import { Flex } from "@chakra-ui/react";
 import { motion, useAnimation } from "framer-motion";
-import { ReactChild, useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
 const MotionSection = motion(Flex);
 
 type SectionProps = {
-  children: ReactChild | ReactChild[];
+  children: ReactNode;
   delay?: number;
 };
 
