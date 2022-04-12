@@ -12,10 +12,6 @@ export default function App() {
   const [notes, setNotes] = useState<Note[]>([]);
   const { user } = useAuth();
 
-  function handleAddNote() {
-    console.log("Add note");
-  }
-
   useEffect(() => {
     (async () => {
       if (user) {

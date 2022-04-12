@@ -9,9 +9,19 @@ import {
   ModalOverlay,
   Textarea,
 } from "@chakra-ui/react";
+import { Timestamp } from "firebase/firestore";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { Note } from "types/Note";
+import { addNotes, getNotes } from "utils/notes";
 
-export default function AddNote({ onClose }: { onClose(): void }) {
+export default function AddNote({
+  uid,
+  onClose,
+}: {
+  uid: string | undefined;
+  onClose(): void;
+}) {
   const date = new Date();
   const today = date.toLocaleString("us", {
     weekday: "long",
@@ -20,6 +30,23 @@ export default function AddNote({ onClose }: { onClose(): void }) {
   });
   const [title, setTitle] = useState("");
   const [content, setContent] = useState(`${today}. `);
+
+  async function handleAddNote() {
+    if (uid) {
+      const newNote: Note = {
+        title,
+        content,
+        created_at: Timestamp.now(),
+        favorited: false,
+        id: uuidv4(),
+      };
+      const notes = await getNotes(uid);
+      const newNotes = [...notes, newNote];
+      await addNotes(uid, newNotes);
+      onClose();
+    }
+  }
+
   return (
     <>
       <ModalOverlay />
@@ -49,7 +76,7 @@ export default function AddNote({ onClose }: { onClose(): void }) {
           />
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" onClick={onClose}>
+          <Button colorScheme="blue" onClick={handleAddNote}>
             Add
           </Button>
         </ModalFooter>

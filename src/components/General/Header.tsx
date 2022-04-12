@@ -67,7 +67,7 @@ export default function Header() {
       </Stack>
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <AddNote onClose={onClose} />
+        <AddNote uid={user?.uid} onClose={onClose} />
       </Modal>
     </Flex>
   );

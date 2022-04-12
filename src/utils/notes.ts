@@ -1,13 +1,11 @@
 import { firestore } from "config/firebaseConfig";
 import {
-  addDoc,
   collection,
   CollectionReference,
   doc,
   DocumentData,
   DocumentReference,
   getDoc,
-  serverTimestamp,
   setDoc,
 } from "firebase/firestore";
 import { Note } from "types/Note";
@@ -24,6 +22,15 @@ export function createUserDocumentRef<T = DocumentData>(uid: string) {
 export async function addUsers(uid: string) {
   const notes: Note[] = [];
   await setDoc(createUserDocumentRef<UserDocumentData>(uid), { notes });
+}
+
+export async function addNotes(uid: string, notes: Note[]) {
+  await setDoc(createUserDocumentRef<UserDocumentData>(uid), { notes });
+}
+
+export async function getNotes(uid: string) {
+  const docSnap = await getDoc(createUserDocumentRef<UserDocumentData>(uid));
+  return docSnap.data()!.notes;
 }
 
 export async function isANewUser(uid: string) {
