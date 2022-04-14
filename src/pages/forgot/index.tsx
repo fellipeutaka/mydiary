@@ -12,6 +12,13 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { AiOutlineMail } from "react-icons/ai";
+import { motion } from "framer-motion";
+
+const MotionForm = motion(Flex);
+const variants = {
+  visible: { opacity: 1, paddingLeft: 0, transition: { duration: 0.5 } },
+  hidden: { paddingLeft: 100, opacity: 0 },
+};
 
 export default function Forgot() {
   const [email, setEmail] = useState("");
@@ -31,13 +38,16 @@ export default function Forgot() {
         <link rel="icon" type="image/png" href="/logo.png" />
       </Head>
 
-      <Flex
+      <MotionForm
         as="main"
         flexDir="column"
         w="100%"
         minH="100vh"
         justifyContent="center"
         alignItems="center"
+        animate="visible"
+        initial="hidden"
+        variants={variants}
       >
         <form onSubmit={handleRecover}>
           <Heading as="h1" mb={8}>
@@ -73,7 +83,7 @@ export default function Forgot() {
             </Link>
           </NextLink>
         </form>
-      </Flex>
+      </MotionForm>
     </>
   );
 }
