@@ -14,6 +14,20 @@ import { BiLock } from "react-icons/bi";
 import { FcGoogle } from "react-icons/fc";
 import { FormEvent, useState } from "react";
 import { useAuth } from "hooks/useAuth";
+import { motion } from "framer-motion";
+
+const MotionForm = motion(Flex);
+const MotionButton = motion(Button);
+
+const variants = {
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+  hidden: { x: -30, opacity: 0 },
+};
+
+const Buttonvariants = {
+  visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+  hidden: { x: -30, opacity: 0 },
+};
 
 export default function SignInForm() {
   const [email, setEmail] = useState("");
@@ -31,12 +45,15 @@ export default function SignInForm() {
 
   return (
     <>
-      <Flex
+      <MotionForm
         as="form"
         flexDir="column"
         w={["90%", "100%"]}
         maxW="480px"
         onSubmit={handleSignIn}
+        animate="visible"
+        initial="hidden"
+        variants={variants}
       >
         <InputGroup>
           <InputLeftElement pointerEvents="none" mt="3px">
@@ -86,14 +103,17 @@ export default function SignInForm() {
           </NextLink>
         </Text>
         <Divider my={6} />
-      </Flex>
-      <Button
+      </MotionForm>
+      <MotionButton
         h={12}
         onClick={authMethods.signInWithGoogle}
         leftIcon={<FcGoogle fontSize={24} />}
+        animate="visible"
+        initial="hidden"
+        variants={Buttonvariants}
       >
         Google
-      </Button>
+      </MotionButton>
     </>
   );
 }

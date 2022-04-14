@@ -101,9 +101,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     const captchaResponse = await fetch(
-      process.env.NODE_ENV === "development"
-        ? `http://localhost:3000/api/validateCaptcha?response=${captchaToken}`
-        : `https://my-diary-online.vercel.app/api/validateCaptcha?response=${captchaToken}`,
+      `/api/validateCaptcha?response=${captchaToken}`,
       {
         method: "POST",
       }

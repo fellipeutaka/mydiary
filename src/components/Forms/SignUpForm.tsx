@@ -14,6 +14,14 @@ import { AiOutlineUser, AiOutlineMail } from "react-icons/ai";
 import { BiLock } from "react-icons/bi";
 import { BsArrowLeft } from "react-icons/bs";
 import ReCAPTCHA from "react-google-recaptcha";
+import { motion } from "framer-motion";
+
+const MotionForm = motion(Flex);
+
+const variants = {
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+  hidden: { x: 30, opacity: 0 },
+};
 
 export default function SignUpForm() {
   const [name, setName] = useState("");
@@ -33,12 +41,15 @@ export default function SignUpForm() {
   }
 
   return (
-    <Flex
+    <MotionForm
       as="form"
       flexDir="column"
       w={["90%", "100%"]}
       maxW="480px"
       onSubmit={handleSignUp}
+      animate="visible"
+      initial="hidden"
+      variants={variants}
     >
       <InputGroup>
         <InputLeftElement pointerEvents="none" mt="3px">
@@ -115,6 +126,6 @@ export default function SignUpForm() {
           Back to Sign In
         </Link>
       </NextLink>
-    </Flex>
+    </MotionForm>
   );
 }
